@@ -3,15 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const [posts, setPosts] = useState({
-    replies: [
-      {
-        tweet_id: "",
-        text: "",
-        user: { name: "", username: "", profile_pic_url: "" },
-      },
-    ],
-  });
+  const [posts, setPosts] = useState(null);
   const [tweetId, setTweetId] = useState<string>();
   const url = `https://twitter154.p.rapidapi.com/tweet/replies?tweet_id=${tweetId}`;
   const options = {
@@ -26,12 +18,7 @@ export default function Home() {
       const response = await fetch(url, options);
 
       const result = await response.json();
-
-      if (result.replies == null) {
-        return;
-      } else {
-        setPosts(result);
-      }
+      setPosts(result);
     } catch (error) {
       console.error(error);
     }
@@ -51,9 +38,7 @@ export default function Home() {
         Get Thread
       </button>
       <div>
-        {posts.replies == null ? (
-          <div>No replies found</div>
-        ) : (
+        {posts &&
           posts.replies.map((reply) => (
             <div className="flex flex-col max-w-[50%] mx-auto justify-start m-2 items-start bg-slate-200 rounded-lg overflow-hidden ">
               <div className="text-md bg-orange-500 px-4 py-2 rounded-br-lg  flex gap-3 inline-block items-center">
@@ -70,8 +55,7 @@ export default function Home() {
                 {reply.text}
               </div>
             </div>
-          ))
-        )}
+          ))}
       </div>
     </div>
   );
