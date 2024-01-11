@@ -26,8 +26,12 @@ export default function Home() {
       const response = await fetch(url, options);
 
       const result = await response.json();
-      setPosts(result);
-      console.log(result);
+
+      if (result.replies == null) {
+        return;
+      } else {
+        setPosts(result);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -47,23 +51,27 @@ export default function Home() {
         Get Thread
       </button>
       <div>
-        {posts.replies.map((reply) => (
-          <div className="flex flex-col max-w-[50%] mx-auto justify-start m-2 items-start bg-slate-200 rounded-lg overflow-hidden ">
-            <div className="text-md bg-orange-500 px-4 py-2 rounded-br-lg  flex gap-3 inline-block items-center">
-              <img
-                src={reply.user.profile_pic_url}
-                className=" w-8 h-8 rounded-full "
-              />
-              <h2>{reply.user.name}</h2>
+        {posts.replies == null ? (
+          <div>No replies found</div>
+        ) : (
+          posts.replies.map((reply) => (
+            <div className="flex flex-col max-w-[50%] mx-auto justify-start m-2 items-start bg-slate-200 rounded-lg overflow-hidden ">
+              <div className="text-md bg-orange-500 px-4 py-2 rounded-br-lg  flex gap-3 inline-block items-center">
+                <img
+                  src={reply.user.profile_pic_url}
+                  className=" w-8 h-8 rounded-full "
+                />
+                <h2>{reply.user.name}</h2>
+              </div>
+              <h3 className="text-sm bg-slate-600 text-gray-400 px-4 inline-block">
+                @{reply.user.username}
+              </h3>
+              <div className="p-4 bg-black text-white rounded-tr-lg">
+                {reply.text}
+              </div>
             </div>
-            <h3 className="text-sm bg-slate-600 text-gray-400 px-4 inline-block">
-              @{reply.user.username}
-            </h3>
-            <div className="p-4 bg-black text-white rounded-tr-lg">
-              {reply.text}
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
