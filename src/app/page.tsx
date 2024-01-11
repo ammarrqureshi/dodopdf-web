@@ -4,8 +4,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [posts, setPosts] = useState<string>();
-  const url =
-    "https://twitter154.p.rapidapi.com/tweet/replies?tweet_id=1721032055423951213";
+  const [tweetId, setTweetId] = useState<string>();
+  const url = `https://twitter154.p.rapidapi.com/tweet/replies?tweet_id=${tweetId}`;
   const options = {
     method: "GET",
     headers: {
@@ -16,6 +16,7 @@ export default function Home() {
   async function getPosts() {
     try {
       const response = await fetch(url, options);
+
       const result = await response.text();
       setPosts(result);
       console.log(result);
@@ -26,7 +27,17 @@ export default function Home() {
 
   return (
     <div>
-      <button onClick={() => getPosts()}>Get tweets</button>
+      <input
+        className="m-5 p-5 border border-orange-500 rounded-md outline-none focus:border-2"
+        type="text"
+        onChange={(e) => setTweetId(e.target.value)}
+      />
+      <button
+        className="p-5 rounded-md bg-orange-500 text-white"
+        onClick={() => getPosts()}
+      >
+        Get tweets
+      </button>
       <div>{posts}</div>
     </div>
   );
