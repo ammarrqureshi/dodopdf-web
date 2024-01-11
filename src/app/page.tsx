@@ -3,7 +3,15 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-  const [posts, setPosts] = useState<string>();
+  const [posts, setPosts] = useState({
+    replies: [
+      {
+        tweet_id: "",
+        text: "",
+        user: { name: "", username: "", profile_pic_url: "" },
+      },
+    ],
+  });
   const [tweetId, setTweetId] = useState<string>();
   const url = `https://twitter154.p.rapidapi.com/tweet/replies?tweet_id=${tweetId}`;
   const options = {
@@ -17,7 +25,7 @@ export default function Home() {
     try {
       const response = await fetch(url, options);
 
-      const result = await response.text();
+      const result = await response.json();
       setPosts(result);
       console.log(result);
     } catch (error) {
@@ -36,9 +44,27 @@ export default function Home() {
         className="p-5 rounded-md bg-orange-500 text-white"
         onClick={() => getPosts()}
       >
-        Get tweets
+        Get Thread
       </button>
-      <div>{posts}</div>
+      <div>
+        {posts.replies.map((reply) => (
+          <div className="flex flex-col max-w-[50%] mx-auto justify-start m-2 items-start bg-slate-200 rounded-lg overflow-hidden ">
+            <div className="text-md bg-orange-500 px-4 py-2 rounded-br-lg  flex gap-3 inline-block items-center">
+              <img
+                src={reply.user.profile_pic_url}
+                className=" w-8 h-8 rounded-full "
+              />
+              <h2>{reply.user.name}</h2>
+            </div>
+            <h3 className="text-sm bg-slate-600 text-gray-400 px-4 inline-block">
+              @{reply.user.username}
+            </h3>
+            <div className="p-4 bg-black text-white rounded-tr-lg">
+              {reply.text}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
