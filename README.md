@@ -1,30 +1,46 @@
+
 # dodopdf
 
 dodopdf is an online tool to create pdfs from tweets, posts, threads and similar web blog posts. It provides various templates to choose from and create a small ebook from your given posts.
 
-## Getting Started
-
-Clone this repo to your local using following command
-
-```git clone <github repo link here>```
-
-Then run the following command to install all dependencies:
-
-```npm install```
-
-Now you are ready to run the local server:
-
-```npm run dev```
-
-The website should be live locally on the link: (https://localhost:3000)
 
 
 
+## Getting started
 
-## Connect with Developers
+Clone this project to your local using:
 
-I am Ammar Qureshi, the developer of dodopdf. You can connect with me here:
+```bash
+  git clone <link for the repo here>
+```
 
-[Twitter](https://www.twitter.com/ammarrqureshi)
-[Github](https://www.github.com/ammarrqureshi)
+Go to the local directory and install all dependencies using:
+
+```bash
+ npm install
+```
+
+Now you are ready to run it on your local server with :
+
+```bash
+ npm run dev
+```
+
+dodopdf should be live on your local server on the link: https://localhost:3000
+
+
+    
+## 🚀 About Me
+I am Ammar Qureshi, A full stack developer who loves building cool stuff with all the skills I have,  the developer of dodopdf. You can connect with me here:
+
+
+
+
+
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://applorsolutions.com/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ammarrqureshi/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/ammarrqureshi)
+
+
+
 
