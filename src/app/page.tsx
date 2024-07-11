@@ -39,8 +39,7 @@ export default function Home() {
         Get Thread
       </button>
       <div>
-        https://api.twitter.com/2/tweets?ids=1212092628029698048&tweet.fields=attachments,author_id,context_annotations,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld&expansions=referenced_tweets.id'{" "}
-        {posts &&
+       {posts &&
           posts.replies.map((index: number, reply: any) => (
             <div
               key={index}
